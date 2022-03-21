@@ -1,0 +1,64 @@
+package factory;
+
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Validate;
+import university.Module;
+import university.StudentName;
+
+import java.util.Date;
+import java.util.List;
+
+public final class PostgraduateTaught extends Postgraduate{
+    /**
+     * the total credits for a PostgraduateTaught to be correctly registered
+     */
+    public final int TotalCredits = 180;
+
+    /**
+     * the pass rate of a PostgraduateTaught to pass or fail the exam
+     */
+    public final double PassRate = 0.5;
+
+    /**
+     * list of modules registered for the PostgraduateTaught
+     */
+    private List<university.Module> modules;
+
+    PostgraduateTaught(String studentType, StudentName studentName, Date birth) { super(studentType, studentName, birth);}
+
+    /**
+     * Add a Module to the student
+     * @param m is a Module object
+     */
+    public void addModules(Module m){
+        List<university.Module> li = this.modules;
+        if(li.size()>0){
+            if(li.contains(m)){
+                throw new IllegalArgumentException("This module has been registered!");
+            }
+            else{
+                li.add(m);
+            }
+        }
+        else{
+            li.add(m);
+        }
+        this.setModules(li);
+    }
+
+    /**
+     * Set the Student registered Modules
+     * @param li is the list of Modules
+     */
+    public void setModules(List<university.Module> li){
+        this.modules = li;
+    }
+
+    /**
+     *
+     * @return list of modules registered for the Undergraduate
+     */
+    public List<Module> getModules(){
+        return modules;
+    }
+
+}
